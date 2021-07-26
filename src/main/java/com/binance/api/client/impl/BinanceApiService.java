@@ -72,7 +72,10 @@ public interface BinanceApiService {
     @GET("/api/v1/ticker/allBookTickers")
     Call<List<BookTicker>> getBookTickers();
 
-    // Account endpoints
+    // Account & Wallet endpoints
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @POST("/sapi/v1/capital/config/getall")
+    Call<CoinsInfo> getCoinsInfo(@Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/api/v3/order")

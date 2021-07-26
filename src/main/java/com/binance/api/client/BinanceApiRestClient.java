@@ -144,6 +144,12 @@ public interface BinanceApiRestClient {
   // Account endpoints
 
   /**
+   * Get All Wallet info and coins'
+   * @return a response containing coins' info and wallet
+   */
+  CoinsInfo getCoinsInfo();
+
+  /**
    * Send in a new order.
    *
    * @param order the new order to submit.
