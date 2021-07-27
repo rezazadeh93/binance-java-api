@@ -1,3 +1,6 @@
+# CI / CD
+[![Java CI with Maven](https://github.com/rezazadeh93/binance-java-api/actions/workflows/ci.yml/badge.svg)](https://github.com/rezazadeh93/binance-java-api/actions/workflows/ci.yml)
+
 # Java Binance API
 
 binance-java-api is a lightweight Java library for interacting with the [Binance API](https://developers.binance.com/docs/api/scopes), providing complete API coverage, and supporting synchronous and asynchronous requests, as well as event streaming using WebSockets.
