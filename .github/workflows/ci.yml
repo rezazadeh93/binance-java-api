@@ -39,4 +39,3 @@ jobs:
             mvn -B install
             find ${{ secrets.PROJECT_PATH }} -type d -exec chmod 755 {} \;
             find ${{ secrets.PROJECT_PATH }} -type f -exec chmod 664 {} \;
-            docker-compose up -d --build
