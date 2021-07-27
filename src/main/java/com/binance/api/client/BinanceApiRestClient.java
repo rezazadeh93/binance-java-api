@@ -147,7 +147,7 @@ public interface BinanceApiRestClient {
    * Get All Wallet info and coins'
    * @return a response containing coins' info and wallet
    */
-  CoinsInfo getCoinsInfo();
+  List<CoinsInfo> getCoinsInfo();
 
   /**
    * Send in a new order.

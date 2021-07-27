@@ -142,7 +142,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	// Account endpoints
 
 	@Override
-	public CoinsInfo getCoinsInfo() {
+	public List<CoinsInfo> getCoinsInfo() {
 		return executeSync(binanceApiService.getCoinsInfo(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
