@@ -271,13 +271,14 @@ public interface BinanceApiRestClient {
    *
    * Enable Withdrawals option has to be active in the API settings.
    *
-   * @param asset asset symbol to withdraw
+   * @param coin asset symbol to withdraw
    * @param address address to withdraw to
    * @param amount amount to withdraw
    * @param name description/alias of the address
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
    */
-  WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag);
+  WithdrawResult withdraw(String coin, String clientOrderId, String network, String address, String amount,
+                          String name, String addressTag, Boolean feeFlag);
 
   /**
    * Conver a list of assets to BNB

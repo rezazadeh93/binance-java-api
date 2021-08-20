@@ -156,7 +156,10 @@ public interface BinanceApiService {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/sapi/v1/capital/withdraw/apply")
-    Call<WithdrawResult> withdraw(@Query("coin") String asset, @Query("address") String address, @Query("amount") String amount, @Query("name") String name, @Query("addressTag") String addressTag,
+    Call<WithdrawResult> withdraw(@Query("coin") String coin,@Query("withdrawOrderId") String clientOrderId,
+                                  @Query("network") String network, @Query("address") String address,
+                                  @Query("addressTag") String addressTag, @Query("amount") String amount,
+                                  @Query("transactionFeeFlag") Boolean feeFlag, @Query("name") String name,
                                   @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
 
