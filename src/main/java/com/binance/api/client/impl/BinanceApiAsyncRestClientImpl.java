@@ -216,15 +216,34 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
+
   @Override
-  public void getDepositHistory(String asset, BinanceApiCallback<DepositHistory> callback) {
-    binanceApiService.getDepositHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+  public void getDepositHistory(String coin, BinanceApiCallback<DepositHistory> callback) {
+    binanceApiService.getDepositHistory(coin, 0, null, null, 0, 1000,
+            BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+            .enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void getDepositHistory(String coin, int status, Long startTime, Long endTime,
+                                int offset, int limit, BinanceApiCallback<DepositHistory> callback) {
+    binanceApiService.getDepositHistory(coin, status, startTime, endTime, offset, limit,
+            BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   @Override
-  public void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback) {
-    binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+  public void getWithdrawHistory(String coin, BinanceApiCallback<WithdrawHistory> callback) {
+    binanceApiService.getWithdrawHistory(coin, 0, null, null, 0, 1000,
+            BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+            .enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
+  @Override
+  public void getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
+                                 int offset, int limit, BinanceApiCallback<WithdrawHistory> callback) {
+    binanceApiService.getWithdrawHistory(coin, status, startTime, endTime, offset, limit,
+            BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
