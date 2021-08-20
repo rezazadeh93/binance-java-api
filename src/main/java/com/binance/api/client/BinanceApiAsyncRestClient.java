@@ -264,7 +264,8 @@ public interface BinanceApiAsyncRestClient {
    * @param name description/alias of the address
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
    */
-  void withdraw(String asset, String address, String amount, String name, String addressTag, BinanceApiCallback<WithdrawResult> callback);
+  void withdraw(String coin, String clientOrderId, String network, String address, String addressTag,
+                String amount, Boolean feeFlag, String name, BinanceApiCallback<WithdrawResult> callback);
 
   /**
    * Fetch account deposit history.
