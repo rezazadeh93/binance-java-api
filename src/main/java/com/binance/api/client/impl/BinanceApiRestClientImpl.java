@@ -262,6 +262,12 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 				System.currentTimeMillis()));
 	}
 
+	@Override
+	public DepositAddress getDepositAddress(String asset, String network) {
+		return executeSync(binanceApiService.getDepositAddress(asset, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+				System.currentTimeMillis()));
+	}
+
 	// User stream endpoints
 
 	@Override

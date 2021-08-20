@@ -307,6 +307,15 @@ public interface BinanceApiRestClient {
    */
   DepositAddress getDepositAddress(String asset);
 
+
+  /**
+   * Fetch deposit address supported network.
+   * @param asset coin property
+   * @param network network property
+   * @return deposit address for given network and asset
+   */
+  DepositAddress getDepositAddress(String asset, String network);
+
   // User stream endpoints
 
   /**
