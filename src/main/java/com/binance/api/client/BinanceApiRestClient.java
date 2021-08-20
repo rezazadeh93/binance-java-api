@@ -301,14 +301,6 @@ public interface BinanceApiRestClient {
   List<SubAccountTransfer> getSubAccountTransfers();
 
   /**
-   * Fetch deposit address.
-   *
-   * @return deposit address for a given asset.
-   */
-  DepositAddress getDepositAddress(String asset);
-
-
-  /**
    * Fetch deposit address supported network.
    * @param asset coin property
    * @param network network property
