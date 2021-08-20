@@ -11,6 +11,7 @@ import com.binance.api.client.domain.market.CandlestickInterval;
 import com.binance.api.client.domain.market.OrderBook;
 import com.binance.api.client.domain.market.TickerPrice;
 import com.binance.api.client.domain.market.TickerStatistics;
+import retrofit2.http.Query;
 
 import java.util.List;
 
@@ -291,14 +292,30 @@ public interface BinanceApiRestClient {
    *
    * @return deposit history, containing a list of deposits
    */
-  DepositHistory getDepositHistory(String asset);
+  DepositHistory getDepositHistory(String coin);
+
+  /**
+   * Fetch account deposit history.
+   *
+   * @return deposit history, containing a list of deposits
+   */
+  DepositHistory getDepositHistory(String coin, int status, Long startTime, Long endTime,
+                                   int offset, int limit);
 
   /**
    * Fetch account withdraw history.
    *
    * @return withdraw history, containing a list of withdrawals
    */
-  WithdrawHistory getWithdrawHistory(String asset);
+  WithdrawHistory getWithdrawHistory(String coin);
+
+  /**
+   * Fetch account withdraw history.
+   *
+   * @return withdraw history, containing a list of withdrawals
+   */
+  WithdrawHistory getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
+                                     int offset, int limit);
 
   /**
    * Fetch sub-account transfer history.
