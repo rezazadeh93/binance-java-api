@@ -262,12 +262,6 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public DepositAddress getDepositAddress(String asset) {
-		return executeSync(binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
-	}
-
-	@Override
 	public DepositAddress getDepositAddress(String asset, String network) {
 		return executeSync(binanceApiService.getDepositAddress(asset, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				System.currentTimeMillis()));
