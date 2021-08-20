@@ -287,6 +287,13 @@ public interface BinanceApiAsyncRestClient {
    */
    void getDepositAddress(String asset, BinanceApiCallback<DepositAddress> callback);
 
+  /**
+   * Fetch deposit address.
+   *
+   * @param callback the callback that handles the response and returns the deposit address
+   */
+   void getDepositAddress(String asset, String network, BinanceApiCallback<DepositAddress> callback);
+
   // User stream endpoints
 
   /**

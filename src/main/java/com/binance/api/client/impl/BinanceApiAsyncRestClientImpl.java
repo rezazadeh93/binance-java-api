@@ -232,6 +232,12 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
+  @Override
+  public void getDepositAddress(String asset, String network, BinanceApiCallback<DepositAddress> callback) {
+    binanceApiService.getDepositAddress(asset, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
+        .enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+
   // User stream endpoints
 
   @Override
