@@ -2,16 +2,9 @@ package com.binance.api.client;
 
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
-import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.Asset;
-import com.binance.api.client.domain.market.AggTrade;
-import com.binance.api.client.domain.market.BookTicker;
-import com.binance.api.client.domain.market.Candlestick;
-import com.binance.api.client.domain.market.CandlestickInterval;
-import com.binance.api.client.domain.market.OrderBook;
-import com.binance.api.client.domain.market.TickerPrice;
-import com.binance.api.client.domain.market.TickerStatistics;
-import retrofit2.http.Query;
+import com.binance.api.client.domain.general.ExchangeInfo;
+import com.binance.api.client.domain.market.*;
 
 import java.util.List;
 
@@ -286,14 +279,14 @@ public interface BinanceApiRestClient {
    *
    * @return deposit history, containing a list of deposits
    */
-  DepositHistory getDepositHistory(String coin);
+  List<Deposit> getDepositHistory(String coin);
 
   /**
    * Fetch account deposit history.
    *
    * @return deposit history, containing a list of deposits
    */
-  DepositHistory getDepositHistory(String coin, int status, Long startTime, Long endTime,
+  List<Deposit> getDepositHistory(String coin, int status, Long startTime, Long endTime,
                                    int offset, int limit);
 
   /**
@@ -301,14 +294,14 @@ public interface BinanceApiRestClient {
    *
    * @return withdraw history, containing a list of withdrawals
    */
-  WithdrawHistory getWithdrawHistory(String coin);
+  List<Withdraw> getWithdrawHistory(String coin);
 
   /**
    * Fetch account withdraw history.
    *
    * @return withdraw history, containing a list of withdrawals
    */
-  WithdrawHistory getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
+  List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
                                      int offset, int limit);
 
   /**
