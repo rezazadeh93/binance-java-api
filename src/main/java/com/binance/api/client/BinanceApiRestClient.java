@@ -2,15 +2,9 @@ package com.binance.api.client;
 
 import com.binance.api.client.domain.account.*;
 import com.binance.api.client.domain.account.request.*;
-import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.Asset;
-import com.binance.api.client.domain.market.AggTrade;
-import com.binance.api.client.domain.market.BookTicker;
-import com.binance.api.client.domain.market.Candlestick;
-import com.binance.api.client.domain.market.CandlestickInterval;
-import com.binance.api.client.domain.market.OrderBook;
-import com.binance.api.client.domain.market.TickerPrice;
-import com.binance.api.client.domain.market.TickerStatistics;
+import com.binance.api.client.domain.general.ExchangeInfo;
+import com.binance.api.client.domain.market.*;
 
 import java.util.List;
 
@@ -265,16 +259,14 @@ public interface BinanceApiRestClient {
    *
    * Enable Withdrawals option has to be active in the API settings.
    *
-   * @param asset asset symbol to withdraw
+   * @param coin asset symbol to withdraw
    * @param address address to withdraw to
    * @param amount amount to withdraw
    * @param name description/alias of the address
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
-   * @param withdrawOrderId client customize id for withdraw order
-   * @param network the transfer network
-   * @param transactionFeeFlag When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.
    */
-  WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag, String withdrawOrderId, String network, Boolean transactionFeeFlag);
+  WithdrawResult withdraw(String coin, String clientOrderId, String network, String address, String amount,
+                          String name, String addressTag, Boolean feeFlag);
 
   /**
    * Conver a list of assets to BNB
@@ -287,14 +279,30 @@ public interface BinanceApiRestClient {
    *
    * @return deposit history, containing a list of deposits
    */
-  DepositHistory getDepositHistory(String asset);
+  List<Deposit> getDepositHistory(String coin);
+
+  /**
+   * Fetch account deposit history.
+   *
+   * @return deposit history, containing a list of deposits
+   */
+  List<Deposit> getDepositHistory(String coin, int status, Long startTime, Long endTime,
+                                   int offset, int limit);
 
   /**
    * Fetch account withdraw history.
    *
    * @return withdraw history, containing a list of withdrawals
    */
-  WithdrawHistory getWithdrawHistory(String asset);
+  List<Withdraw> getWithdrawHistory(String coin);
+
+  /**
+   * Fetch account withdraw history.
+   *
+   * @return withdraw history, containing a list of withdrawals
+   */
+  List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
+                                     int offset, int limit);
 
   /**
    * Fetch sub-account transfer history.
@@ -304,11 +312,12 @@ public interface BinanceApiRestClient {
   List<SubAccountTransfer> getSubAccountTransfers();
 
   /**
-   * Fetch deposit address.
-   *
-   * @return deposit address for a given asset.
+   * Fetch deposit address supported network.
+   * @param asset coin property
+   * @param network network property
+   * @return deposit address for given network and asset
    */
-  DepositAddress getDepositAddress(String asset);
+  DepositAddress getDepositAddress(String asset, String network);
 
   // User stream endpoints
 

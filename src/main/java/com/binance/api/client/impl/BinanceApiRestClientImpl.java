@@ -228,11 +228,13 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 				System.currentTimeMillis());
 	}
 
-    @Override
-    public WithdrawResult withdraw(String asset, String address, String amount, String name, String addressTag, String withdrawOrderId, String network, Boolean transactionFeeFlag) {
-      return executeSync(binanceApiService.withdraw(asset, address, amount, name, addressTag, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-              System.currentTimeMillis(), withdrawOrderId, network, transactionFeeFlag));
-    }
+	@Override
+	public WithdrawResult withdraw(String coin, String clientOrderId, String network, String address, String amount,
+								   String name, String addressTag, Boolean feeFlag) {
+		return executeSync(binanceApiService.withdraw(coin, clientOrderId, network, address,
+				addressTag, amount, feeFlag, name,
+				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+	}
 
 	@Override
 	public DustTransferResponse dustTranfer(List<String> asset) {
@@ -240,15 +242,29 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public DepositHistory getDepositHistory(String asset) {
-		return executeSync(binanceApiService.getDepositHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(String coin) {
+		return executeSync(binanceApiService.getDepositHistory(coin, 0, null, null, 0, 1000,
+				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
 	@Override
-	public WithdrawHistory getWithdrawHistory(String asset) {
-		return executeSync(binanceApiService.getWithdrawHistory(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
-				System.currentTimeMillis()));
+	public List<Deposit> getDepositHistory(String coin, int status, Long startTime, Long endTime,
+											int offset, int limit) {
+		return executeSync(binanceApiService.getDepositHistory(coin, status, startTime, endTime, offset, limit,
+				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+	}
+
+	@Override
+	public List<Withdraw> getWithdrawHistory(String coin) {
+		return executeSync(binanceApiService.getWithdrawHistory(coin, 0, null, null, 0, 1000,
+				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+	}
+
+	@Override
+	public List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
+											  int offset, int limit) {
+		return executeSync(binanceApiService.getWithdrawHistory(coin, status, startTime, endTime, offset, limit,
+				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
 	@Override
@@ -257,8 +273,8 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public DepositAddress getDepositAddress(String asset) {
-		return executeSync(binanceApiService.getDepositAddress(asset, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+	public DepositAddress getDepositAddress(String asset, String network) {
+		return executeSync(binanceApiService.getDepositAddress(asset, network, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
 				System.currentTimeMillis()));
 	}
 
