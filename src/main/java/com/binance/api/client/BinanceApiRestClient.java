@@ -296,13 +296,13 @@ public interface BinanceApiRestClient {
    */
   List<Withdraw> getWithdrawHistory(String coin);
 
-  /**
-   * Fetch account withdraw history.
-   *
-   * @return withdraw history, containing a list of withdrawals
-   */
-  List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
-                                     int offset, int limit);
+    /**
+     * Fetch account withdraw history.
+     *
+     * @return withdraw history, containing a list of withdrawals
+     */
+    List<Withdraw> getWithdrawHistory(String coin, Integer status, Long startTime, Long endTime, String withdrawOrderId,
+                                      int offset, int limit);
 
   /**
    * Fetch sub-account transfer history.
