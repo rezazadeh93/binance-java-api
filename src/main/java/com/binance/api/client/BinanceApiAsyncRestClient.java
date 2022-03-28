@@ -271,8 +271,8 @@ public interface BinanceApiAsyncRestClient {
    *
    * @param callback the callback that handles the response and returns the deposit history
    */
-  void getDepositHistory(String coin, int status, Long startTime, Long endTime,
-                         int offset, int limit, BinanceApiCallback<List<Deposit>> callback);
+  void getDepositHistory(String coin, Integer status, Long startTime, Long endTime,
+                         Integer offset, Integer limit, BinanceApiCallback<List<Deposit>> callback);
 
   /**
    * Fetch account withdraw history.
@@ -286,8 +286,8 @@ public interface BinanceApiAsyncRestClient {
    *
    * @param callback the callback that handles the response and returns the withdraw history
    */
-  void getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
-                          int offset, int limit, BinanceApiCallback<List<Withdraw>> callback);
+  void getWithdrawHistory(String coin, String withdrawOrderId, Integer status, Long startTime, Long endTime,
+                          Integer offset, Integer limit, BinanceApiCallback<List<Withdraw>> callback);
 
   /**
    * Fetch deposit address.

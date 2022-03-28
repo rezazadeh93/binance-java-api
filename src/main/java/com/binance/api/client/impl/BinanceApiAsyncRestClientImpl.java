@@ -210,14 +210,14 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 
   @Override
   public void getDepositHistory(String coin, BinanceApiCallback<List<Deposit>> callback) {
-    binanceApiService.getDepositHistory(coin, 0, null, null, 0, 1000,
+    binanceApiService.getDepositHistory(coin, null, null, null, null, 1000,
             BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
             .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   @Override
-  public void getDepositHistory(String coin, int status, Long startTime, Long endTime,
-                                int offset, int limit, BinanceApiCallback<List<Deposit>> callback) {
+  public void getDepositHistory(String coin, Integer status, Long startTime, Long endTime,
+                                Integer offset, Integer limit, BinanceApiCallback<List<Deposit>> callback) {
     binanceApiService.getDepositHistory(coin, status, startTime, endTime, offset, limit,
             BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
@@ -225,15 +225,15 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
 
   @Override
   public void getWithdrawHistory(String coin, BinanceApiCallback<List<Withdraw>> callback) {
-    binanceApiService.getWithdrawHistory(coin, 0, null, null, 0, 1000,
+    binanceApiService.getWithdrawHistory(coin, null, null, null, null, null, null,
             BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
             .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   @Override
-  public void getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
-                                 int offset, int limit, BinanceApiCallback<List<Withdraw>> callback) {
-    binanceApiService.getWithdrawHistory(coin, status, startTime, endTime, offset, limit,
+  public void getWithdrawHistory(String coin, String withdrawOrderId, Integer status, Long startTime, Long endTime,
+                                 Integer offset, Integer limit, BinanceApiCallback<List<Withdraw>> callback) {
+    binanceApiService.getWithdrawHistory(coin, withdrawOrderId, status, startTime, endTime, offset, limit,
             BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis())
         .enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
