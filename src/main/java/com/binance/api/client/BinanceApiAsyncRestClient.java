@@ -249,18 +249,23 @@ public interface BinanceApiAsyncRestClient {
    *
    * Enable Withdrawals option has to be active in the API settings.
    *
-   * @param asset asset symbol to withdraw
+   * @param coin asset symbol to withdraw
+   * @param withdrawOrderId client id for withdraw
+   * @param network the network to use for the withdrawal
    * @param address address to withdraw to
-   * @param amount amount to withdraw
-   * @param name description/alias of the address
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
+   * @param amount amount to withdraw
+   * @param transactionFeeFlag When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.
+   * @param name Description of the address. Space in name should be encoded into %20.
+   * @param callback the callback that handles the response with a list of trades
    */
-  void withdraw(String coin, String clientOrderId, String network, String address, String addressTag,
-                String amount, Boolean feeFlag, String name, BinanceApiCallback<WithdrawResult> callback);
+  void withdraw(String coin, String withdrawOrderId, String network, String address, String addressTag,
+                String amount, Boolean transactionFeeFlag, String name, BinanceApiCallback<WithdrawResult> callback);
 
   /**
    * Fetch account deposit history.
    *
+   * @param coin the asset to get the history for
    * @param callback the callback that handles the response and returns the deposit history
    */
   void getDepositHistory(String coin, BinanceApiCallback<List<Deposit>> callback);
@@ -269,6 +274,12 @@ public interface BinanceApiAsyncRestClient {
   /**
    * Fetch account deposit history.
    *
+   * @param coin the asset to get the history for
+   * @param status 0(0:pending,6: credited but cannot withdraw, 1:success)
+   * @param startTime Default: 90 days from current timestamp
+   * @param endTime Default: present timestamp
+   * @param offset Default:0
+   * @param limit Default:1000, Max:1000
    * @param callback the callback that handles the response and returns the deposit history
    */
   void getDepositHistory(String coin, Integer status, Long startTime, Long endTime,
@@ -277,6 +288,7 @@ public interface BinanceApiAsyncRestClient {
   /**
    * Fetch account withdraw history.
    *
+   * @param coin the asset to get the history for
    * @param callback the callback that handles the response and returns the withdraw history
    */
   void getWithdrawHistory(String coin, BinanceApiCallback<List<Withdraw>> callback);
@@ -284,6 +296,13 @@ public interface BinanceApiAsyncRestClient {
   /**
    * Fetch account withdraw history.
    *
+   * @param coin the asset to get the history for
+   * @param withdrawOrderId client id for withdraw
+   * @param status 0(0:Email Sent,1:Cancelled 2:Awaiting Approval 3:Rejected 4:Processing 5:Failure 6:Completed)
+   * @param startTime Default: 90 days from current timestamp
+   * @param endTime Default: present timestamp
+   * @param offset Default:0
+   * @param limit Default:1000, Max:1000
    * @param callback the callback that handles the response and returns the withdraw history
    */
   void getWithdrawHistory(String coin, String withdrawOrderId, Integer status, Long startTime, Long endTime,
