@@ -229,10 +229,10 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	}
 
 	@Override
-	public WithdrawResult withdraw(String coin, String clientOrderId, String network, String address, String amount,
-								   String name, String addressTag, Boolean feeFlag) {
-		return executeSync(binanceApiService.withdraw(coin, clientOrderId, network, address,
-				addressTag, amount, feeFlag, name,
+	public WithdrawResult withdraw(String coin, String withdrawOrderId, String network, String address, String amount,
+								   String name, String addressTag, Boolean transactionFeeFlag) {
+		return executeSync(binanceApiService.withdraw(coin, withdrawOrderId, network, address,
+				addressTag, amount, transactionFeeFlag, name,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
@@ -243,7 +243,7 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
 	@Override
 	public List<Deposit> getDepositHistory(String coin) {
-		return executeSync(binanceApiService.getDepositHistory(coin, 0, null, null, 0, 1000,
+		return executeSync(binanceApiService.getDepositHistory(coin, null, null, null, null, null,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
@@ -256,14 +256,14 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 
 	@Override
 	public List<Withdraw> getWithdrawHistory(String coin) {
-		return executeSync(binanceApiService.getWithdrawHistory(coin, 0, null, null, 0, 1000,
+		return executeSync(binanceApiService.getWithdrawHistory(coin, null, null, null, null, null, null,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 
 	@Override
-	public List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
-											  int offset, int limit) {
-		return executeSync(binanceApiService.getWithdrawHistory(coin, status, startTime, endTime, offset, limit,
+	public List<Withdraw> getWithdrawHistory(String coin, String withdrawOrderId, Integer status, Long startTime, Long endTime,
+											  Integer offset, Integer limit) {
+		return executeSync(binanceApiService.getWithdrawHistory(coin, withdrawOrderId, status, startTime, endTime, offset, limit,
 				BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
 	}
 

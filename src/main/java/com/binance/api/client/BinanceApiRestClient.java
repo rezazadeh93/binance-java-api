@@ -260,13 +260,16 @@ public interface BinanceApiRestClient {
    * Enable Withdrawals option has to be active in the API settings.
    *
    * @param coin asset symbol to withdraw
+   * @param withdrawOrderId client id for withdraw
+   * @param network the network to use for the withdrawal
    * @param address address to withdraw to
-   * @param amount amount to withdraw
-   * @param name description/alias of the address
    * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
+   * @param amount amount to withdraw
+   * @param transactionFeeFlag When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.
+   * @param name Description of the address. Space in name should be encoded into %20.
    */
-  WithdrawResult withdraw(String coin, String clientOrderId, String network, String address, String amount,
-                          String name, String addressTag, Boolean feeFlag);
+  WithdrawResult withdraw(String coin, String withdrawOrderId, String network, String address, String amount,
+                          String name, String addressTag, Boolean transactionFeeFlag);
 
   /**
    * Conver a list of assets to BNB
@@ -277,6 +280,7 @@ public interface BinanceApiRestClient {
   /**
    * Fetch account deposit history.
    *
+   * @param coin the asset to get the history for
    * @return deposit history, containing a list of deposits
    */
   List<Deposit> getDepositHistory(String coin);
@@ -284,6 +288,12 @@ public interface BinanceApiRestClient {
   /**
    * Fetch account deposit history.
    *
+   * @param coin the asset to get the history for
+   * @param status 0(0:pending,6: credited but cannot withdraw, 1:success)
+   * @param startTime Default: 90 days from current timestamp
+   * @param endTime Default: present timestamp
+   * @param offset Default:0
+   * @param limit Default:1000, Max:1000
    * @return deposit history, containing a list of deposits
    */
   List<Deposit> getDepositHistory(String coin, int status, Long startTime, Long endTime,
@@ -292,6 +302,7 @@ public interface BinanceApiRestClient {
   /**
    * Fetch account withdraw history.
    *
+   * @param coin the asset to get the history for
    * @return withdraw history, containing a list of withdrawals
    */
   List<Withdraw> getWithdrawHistory(String coin);
@@ -299,10 +310,17 @@ public interface BinanceApiRestClient {
   /**
    * Fetch account withdraw history.
    *
+   * @param coin the asset to get the history for
+   * @param withdrawOrderId client id for withdraw
+   * @param status 0(0:Email Sent,1:Cancelled 2:Awaiting Approval 3:Rejected 4:Processing 5:Failure 6:Completed)
+   * @param startTime Default: 90 days from current timestamp
+   * @param endTime Default: present timestamp
+   * @param offset Default:0
+   * @param limit Default:1000, Max:1000
    * @return withdraw history, containing a list of withdrawals
    */
-  List<Withdraw> getWithdrawHistory(String coin, int status, Long startTime, Long endTime,
-                                     int offset, int limit);
+  List<Withdraw> getWithdrawHistory(String coin, String withdrawOrderId, Integer status, Long startTime, Long endTime,
+                                     Integer offset, Integer limit);
 
   /**
    * Fetch sub-account transfer history.
